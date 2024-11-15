@@ -14,7 +14,7 @@ let dataOffset = []; // Array for storing the CSV data
 // Load pGI Allegati CSV
 function loadpGICSV() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
-    const filePath = 'pGIAllegati.csv';
+    const filePath = 'FileCSV/pGIAllegati.csv';
     const csvUrl = githubRawURL(repo, filePath);
 
     fetch(csvUrl)
@@ -50,7 +50,7 @@ function loadpGICSV() {
 // Load Offset CSV and initialize
 async function loadOffsetCSV() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
-    const filePath = 'ElementOffset_Data.csv';
+    const filePath = 'FileCSV/ElementOffset_Data.csv';
     const csvUrl = githubRawURL(repo, filePath);
 
     try {
@@ -151,7 +151,7 @@ function searchTable() {
 // Load and create pie chart for offset data
 function loadPieOffsetCSV() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
-    const filePath = 'ElementOffset_Data.csv';
+    const filePath = 'FileCSV/ElementOffset_Data.csv';
     const csvUrl = githubRawURL(repo, filePath);
 
     fetch(csvUrl)
