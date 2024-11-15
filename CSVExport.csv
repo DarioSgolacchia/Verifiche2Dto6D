@@ -1,4 +1,4 @@
-In/out,ID,Raggruppamento,Descrizione,Modalità,Formato,Percentuale,Stato
+In/out,ID,Verifiche,Descrizione,Modalità,Formato,Percentuale,Stato
 X,1,pGI e Allegati,Verifica generale del Piano di Gestione Informativa e degli Allegati,MANU,-,0%,1
 X,2,Elaborati progettuali,Verifica coerenza generale dei Modelli ed elaborati,MANU,-,0%,0
 X,3,Clash Detection,Verifica delle interferenze geometriche tra modelli,CODE,ifc,0%,0
