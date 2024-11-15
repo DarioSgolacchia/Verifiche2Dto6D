@@ -10,7 +10,7 @@ const githubRawURL = (repo, filePath) => `https://raw.githubusercontent.com/${re
 
 function loadDatiCSV() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
-    const filePath = 'Dati.csv';
+    const filePath = 'FileCSV/Dati.csv';
     const csvUrl = githubRawURL(repo, filePath);
 
     fetch(csvUrl)
@@ -53,7 +53,7 @@ function loadDatiCSV() {
 
 function loadPieCSV() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
-    const filePath = 'CSVExport.csv';
+    const filePath = 'FileCSV/CSVExport.csv';
     const csvUrl = githubRawURL(repo, filePath);
 
     fetch(csvUrl)
@@ -103,7 +103,7 @@ function displayStatistics(total, stato1, stato0) {
 
 function loadLineeGuidaCSV() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
-    const filePath = 'LineeGuida.csv';
+    const filePath = 'FileCSV/LineeGuida.csv';
     const csvUrl = githubRawURL(repo, filePath);
 
     fetch(csvUrl)
@@ -146,7 +146,7 @@ function loadLineeGuidaCSV() {
 
 function loadClusterCSV() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
-    const filePath = 'Cluster.csv';
+    const filePath = 'FileCSV/Cluster.csv';
     const csvUrl = githubRawURL(repo, filePath);
 
     fetch(csvUrl)
@@ -188,7 +188,7 @@ function loadClusterCSV() {
 // Funzione per caricare il CSV da GitHub e visualizzarlo
 async function loadCSV() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
-    const filePath = 'CSVExport.csv';
+    const filePath = 'FileCSV/CSVExport.csv';
     const csvUrl = githubRawURL(repo, filePath);
 
     try {
