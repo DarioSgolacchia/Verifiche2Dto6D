@@ -11,7 +11,7 @@ const rowsPerPage = 15; // Maximum rows per page
 let currentPage = 1;
 let dataOffset = []; // Array for storing the CSV data
 
-// Load pGI Allegati CSV
+// Load pGI Allegati CSV : pGIAllegati.csv
 function loadpGICSV() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
     const filePath = 'FileCSV/pGIAllegati.csv';
@@ -47,7 +47,7 @@ function loadpGICSV() {
         .catch(error => console.error('Error fetching CSV file:', error));
 }
 
-// Load Offset CSV and initialize
+// Load Offset CSV : ElementOffset_Data.csv
 async function loadOffsetCSV() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
     const filePath = 'FileCSV/ElementOffset_Data.csv';
