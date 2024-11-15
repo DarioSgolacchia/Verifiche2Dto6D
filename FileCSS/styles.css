@@ -1,0 +1,150 @@
+/* Stili Pagina Principale */
+/* Stili header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: gray;
+  margin: 5px 0;
+  padding: 10px 20px;
+  font-family: "Roboto", Arial, sans-serif;
+  color: black;
+  flex-wrap: wrap;
+}
+.body {
+  font-family: "Roboto", Arial, sans-serif;
+}
+
+.Logo,
+.Titolo,
+.Contatti {
+  flex: 1 1 30%;
+  text-align: center;
+}
+
+.Logo img {
+  max-width: 250px;
+  height: auto;
+}
+
+.Logo {
+  text-align: left;
+}
+
+.Titolo h1 {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.Contatti {
+  text-align: right;
+}
+
+.Contatti a {
+  color: black;
+  text-decoration: none;
+}
+
+.Contatti a:hover {
+  color: lightgray;
+}
+
+.Menu {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  margin: 5px 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  background: white;
+}
+
+.Menu button {
+  width: 100px; /* Imposta la larghezza fissa a 100px */
+  height: 40px; /* Puoi regolare l'altezza a seconda delle necessità */
+  background-color: lightgray;
+  color: black;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; /* Troncatura del testo per non andare oltre i 100px */
+}
+
+.Menu button a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  width: 100%; /* Assicura che il link riempia il bottone */
+  text-align: center; /* Centra il testo */
+}
+
+.Menu button:hover {
+  background-color: gray;
+}
+
+/* Responsività header */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .Logo,
+  .Titolo,
+  .Contatti {
+    flex: 1 1 100%;
+    margin: 5px 0;
+    text-align: center;
+  }
+
+  .Titolo h1 {
+    font-size: 1.2em;
+  }
+}
+
+/* Container articoli */
+.Container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.Uno,
+.Due,
+.Tre {
+  flex: 1 1 30%;
+  min-height: 300px; /* Imposta un'altezza minima per evitare che gli articoli si comprimano troppo */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Distribuisce il contenuto senza tagliare */
+  padding: 10px;
+  background: lightgrey;
+}
+
+/* Layout responsivo per articoli */
+@media (max-width: 899px) {
+  .Uno,
+  .Due,
+  .Tre {
+    flex: 1 1 100%; /* Ogni articolo occupa l'intera larghezza su dispositivi più piccoli */
+  }
+}
+
+@media (max-width: 600px) {
+  .Container {
+    display: block; /* Gli articoli si dispongono uno sotto l'altro su dispositivi piccoli */
+  }
+
+  .Logo img {
+    max-width: 200px;
+  }
+
+  .Menu button {
+    width: 100%; /* Bottoni in colonna su dispositivi piccoli */
+  }
+}

@@ -1,0 +1,20 @@
+/* Stili per tabelle */
+.NamingConvention {
+    width: 100%;
+    table-layout: fixed;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.NamingConvention th {
+    background-color: #f2f2f2;
+    text-align: center;
+    padding: 10px;
+}
+
+.NamingConvention td {
+    border: 1px solid #000;
+    text-align: center;
+    padding: 8px;
+    word-wrap: break-word;
+}
