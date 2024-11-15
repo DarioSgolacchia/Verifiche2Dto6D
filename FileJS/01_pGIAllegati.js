@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    loadOffsetCSV();
     loadpGICSV();
+    loadOffsetCSV();
     loadPieOffsetCSV();
 });
 
