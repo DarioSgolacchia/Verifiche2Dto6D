@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     loadCoordinationCSV();
 });
 
+const githubRawURL = (repo, filePath) => `https://raw.githubusercontent.com/${repo}/main/${filePath}`;
+
+// Georeferenziazione
 function loadCoordinationCSV() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
     const filePath = 'FileCSV/CoordinationReport_Data.csv';
