@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function loadCoordinationCSV() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
-    const filePath = 'CoordinationReport_Data.csv';
+    const filePath = 'FileCSV/CoordinationReport_Data.csv';
     const csvUrl = githubRawURL(repo, filePath);
 
     fetch(csvUrl)
