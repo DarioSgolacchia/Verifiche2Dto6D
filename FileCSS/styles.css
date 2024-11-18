@@ -23,7 +23,7 @@ header {
 }
 
 .Logo img {
-  max-width: 250px;
+  max-width: 100%; /* Rende l'immagine del logo responsiva */
   height: auto;
 }
 
@@ -104,6 +104,23 @@ header {
   .Titolo h1 {
     font-size: 1.2em;
   }
+
+  .Logo img {
+    max-width: 200px; /* Riduce la dimensione del logo sui dispositivi piccoli */
+  }
+}
+
+/* Stili immagini */
+img {
+  max-width: 100%; /* Rende tutte le immagini responsivi */
+  height: auto;
+  display: block;
+}
+
+.Cliente {
+  width: 100%; /* Adatta l'immagine alla larghezza del contenitore */
+  max-width: 750px; /* Imposta un limite massimo */
+  margin: 0 auto; /* Centra l'immagine orizzontalmente */
 }
 
 /* Container articoli */
@@ -138,10 +155,6 @@ header {
 @media (max-width: 600px) {
   .Container {
     display: block; /* Gli articoli si dispongono uno sotto l'altro su dispositivi piccoli */
-  }
-
-  .Logo img {
-    max-width: 200px;
   }
 
   .Menu button {
