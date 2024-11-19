@@ -1,163 +1,109 @@
-/* Stili Pagina Principale */
-/* Stili header */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: gray;
-  margin: 5px 0;
-  padding: 10px 20px;
-  font-family: "Roboto", Arial, sans-serif;
-  color: black;
-  flex-wrap: wrap;
-}
-.body {
-  font-family: "Roboto", Arial, sans-serif;
-}
+/* Stile base per la struttura e il layout principale */
 
-.Logo,
-.Titolo,
-.Contatti {
-  flex: 1 1 30%;
-  text-align: center;
-}
-
-.Logo img {
-  max-width: 100%; /* Rende l'immagine del logo responsiva */
-  height: auto;
-}
-
-.Logo {
-  text-align: left;
-}
-
-.Titolo h1 {
-  font-size: 1.5em;
+/* Imposta margini e padding a zero per tutti gli elementi */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Include il padding e il bordo nelle dimensioni totali dell'elemento */
 }
 
-.Contatti {
-  text-align: right;
+/* Stile generale del corpo */
+body {
+  font-family: "Arial", sans-serif; /* Font principale */
+  line-height: 1.6; /* Altezza delle righe */
+  background-color: #f4f4f9; /* Colore di sfondo */
+  color: #333; /* Colore del testo */
+  padding: 20px; /* Spaziatura interna per il corpo */
 }
 
-.Contatti a {
-  color: black;
-  text-decoration: none;
+/* Stile per il contenitore principale */
+.container {
+  max-width: 1200px; /* Larghezza massima del contenitore */
+  margin: 0 auto; /* Centra il contenitore */
+  padding: 20px; /* Spaziatura interna */
 }
 
-.Contatti a:hover {
-  color: lightgray;
+/* Stile per i titoli */
+h1,
+h2,
+h3 {
+  color: #444; /* Colore dei titoli */
+  margin-bottom: 10px; /* Spazio sotto i titoli */
 }
 
-.Menu {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  padding: 10px;
-  margin: 5px 0;
-  max-width: 100%;
-  box-sizing: border-box;
-  background: white;
+/* Stile per i link */
+a {
+  color: #0066cc; /* Colore del link */
+  text-decoration: none; /* Rimuove la sottolineatura */
 }
 
-.Menu button {
-  width: 100px; /* Imposta la larghezza fissa a 100px */
-  height: 40px; /* Puoi regolare l'altezza a seconda delle necessità */
-  background-color: lightgray;
-  color: black;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis; /* Troncatura del testo per non andare oltre i 100px */
+a:hover {
+  text-decoration: underline; /* Aggiunge la sottolineatura al passaggio del mouse */
 }
 
-.Menu button a {
-  text-decoration: none;
-  color: black;
-  display: block;
-  width: 100%; /* Assicura che il link riempia il bottone */
-  text-align: center; /* Centra il testo */
+/* Stile per i pulsanti */
+button {
+  background-color: #007bff; /* Colore di sfondo */
+  color: #fff; /* Colore del testo */
+  border: none; /* Nessun bordo */
+  padding: 10px 20px; /* Spaziatura interna */
+  cursor: pointer; /* Cambia il cursore in una mano */
+  border-radius: 5px; /* Angoli arrotondati */
 }
 
-.Menu button:hover {
-  background-color: gray;
+button:hover {
+  background-color: #0056b3; /* Cambia colore al passaggio del mouse */
 }
 
-/* Responsività header */
-@media (max-width: 600px) {
-  header {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .Logo,
-  .Titolo,
-  .Contatti {
-    flex: 1 1 100%;
-    margin: 5px 0;
-    text-align: center;
-  }
-
-  .Titolo h1 {
-    font-size: 1.2em;
-  }
-
-  .Logo img {
-    max-width: 200px; /* Riduce la dimensione del logo sui dispositivi piccoli */
-  }
-}
-
-/* Stili immagini */
+/* Stile per le immagini */
 img {
-  max-width: 100%; /* Rende tutte le immagini responsivi */
-  height: auto;
-  display: block;
+  max-width: 100%; /* Rende le immagini responsive */
+  height: auto; /* Mantiene le proporzioni */
+  display: block; /* Rimuove lo spazio inferiore delle immagini inline */
 }
 
-.Cliente {
-  width: 100%; /* Adatta l'immagine alla larghezza del contenitore */
-  max-width: 750px; /* Imposta un limite massimo */
-  margin: 0 auto; /* Centra l'immagine orizzontalmente */
-}
+/* Stile responsivo per dispositivi con schermi più piccoli */
 
-/* Container articoli */
-.Container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 10px 0;
-}
+/* Media query per schermi con larghezza massima di 768px */
+@media (max-width: 768px) {
+  /* Riduci la dimensione del contenitore principale */
+  .container {
+    padding: 10px; /* Riduce la spaziatura interna */
+  }
 
-.Uno,
-.Due,
-.Tre {
-  flex: 1 1 30%;
-  min-height: 300px; /* Imposta un'altezza minima per evitare che gli articoli si comprimano troppo */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* Distribuisce il contenuto senza tagliare */
-  padding: 10px;
-  background: lightgrey;
-}
+  /* Adatta i titoli per schermi più piccoli */
+  h1 {
+    font-size: 1.8em; /* Dimensione più piccola del titolo */
+  }
 
-/* Layout responsivo per articoli */
-@media (max-width: 899px) {
-  .Uno,
-  .Due,
-  .Tre {
-    flex: 1 1 100%; /* Ogni articolo occupa l'intera larghezza su dispositivi più piccoli */
+  h2 {
+    font-size: 1.5em; /* Dimensione più piccola del sottotitolo */
+  }
+
+  /* Adatta i pulsanti */
+  button {
+    padding: 8px 16px; /* Riduce la spaziatura del pulsante */
   }
 }
 
-@media (max-width: 600px) {
-  .Container {
-    display: block; /* Gli articoli si dispongono uno sotto l'altro su dispositivi piccoli */
+/* Media query per schermi molto piccoli (larghezza max 480px) */
+@media (max-width: 480px) {
+  /* Cambia il font per adattarsi agli schermi più piccoli */
+  body {
+    font-size: 14px; /* Font più piccolo */
   }
 
-  .Menu button {
-    width: 100%; /* Bottoni in colonna su dispositivi piccoli */
+  /* Stile dei titoli */
+  h1 {
+    font-size: 1.5em; /* Riduce ulteriormente la dimensione del titolo */
+  }
+
+  h2 {
+    font-size: 1.2em; /* Riduce ulteriormente il sottotitolo */
+  }
+
+  /* Adatta il layout delle immagini */
+  img {
+    max-width: 100%; /* Mantiene le immagini completamente adattabili */
   }
 }

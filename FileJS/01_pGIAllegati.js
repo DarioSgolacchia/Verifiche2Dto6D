@@ -1,37 +1,43 @@
 document.addEventListener('DOMContentLoaded', () => {
-    loadpGICSV();
-    loadOffsetCSV();
-    loadPieOffsetCSV();
-    createBarChart();
+    loadpGICSV();          // Carica i dati CSV per pGI Allegati
+    loadOffsetCSV();       // Carica i dati CSV per Offset
+    loadPieOffsetCSV();    // Carica i dati CSV per il grafico a torta
+    createBarChart();      // Crea l'istogramma
 });
 
+// Funzione per ottenere l'URL raw del file CSV da GitHub
 const githubRawURL = (repo, filePath) => `https://raw.githubusercontent.com/${repo}/main/${filePath}`;
 
-// Constants and Variables
-const rowsPerPage = 15; // Maximum rows per page
+// Costanti e variabili
+const rowsPerPage = 15; // Numero massimo di righe per pagina
 let currentPage = 1;
-let dataOffset = []; // Array for storing the CSV data
+let dataOffset = []; // Array per memorizzare i dati CSV caricati per Offset
 
-// Load pGI Allegati CSV : pGIAllegati.csv
+// Funzione per caricare i dati CSV di pGI Allegati
 function loadpGICSV() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
     const filePath = 'FileCSV/pGIAllegati.csv';
     const csvUrl = githubRawURL(repo, filePath);
 
     fetch(csvUrl)
-        .then(response => response.ok ? response.text() : Promise.reject('Network response was not OK'))
+        .then(response => response.ok ? response.text() : Promise.reject('Risposta di rete non OK'))
         .then(data => {
             const parsedData = Papa.parse(data, { header: false }).data;
             const tableHeader = document.getElementById('pGIHeader');
             const tableBody = document.getElementById('pGIBody');
+            
             if (tableHeader && tableBody) {
-                tableHeader.innerHTML = '';
-                tableBody.innerHTML = '';
+                tableHeader.innerHTML = '';  // Pulisce l'intestazione della tabella
+                tableBody.innerHTML = '';    // Pulisce il corpo della tabella
+                
+                // Aggiungi l'intestazione alla tabella
                 parsedData[0].forEach(cell => {
                     const th = document.createElement('th');
                     th.textContent = cell;
                     tableHeader.appendChild(th);
                 });
+
+                // Aggiungi le righe dei dati alla tabella
                 parsedData.slice(1).forEach(row => {
                     const tr = document.createElement('tr');
                     row.forEach(cell => {
@@ -42,13 +48,13 @@ function loadpGICSV() {
                     tableBody.appendChild(tr);
                 });
             } else {
-                console.error('pGIHeader or pGIBody not found in DOM');
+                console.error('pGIHeader o pGIBody non trovato nel DOM');
             }
         })
-        .catch(error => console.error('Error fetching CSV file:', error));
+        .catch(error => console.error('Errore nel caricamento del CSV:', error));
 }
 
-// Load Offset CSV : ElementOffset_Data.csv
+// Funzione per caricare i dati CSV di Offset
 async function loadOffsetCSV() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
     const filePath = 'FileCSV/ElementOffset_Data.csv';
@@ -56,13 +62,13 @@ async function loadOffsetCSV() {
 
     try {
         const response = await fetch(csvUrl);
-        if (!response.ok) throw new Error('Network response was not OK');
+        if (!response.ok) throw new Error('Risposta di rete non OK');
         const data = await response.text();
         const rows = data.trim().split('\n').map(row => row.split(','));
         const tableHeader = document.getElementById('OffsetHeader');
-        dataOffset = rows.slice(1); // Store data for pagination
+        dataOffset = rows.slice(1); // Memorizza i dati per la paginazione
 
-        // Create table header
+        // Crea l'intestazione della tabella
         const headerRow = document.createElement('tr');
         rows[0].forEach(headerCell => {
             const th = document.createElement('th');
@@ -71,15 +77,15 @@ async function loadOffsetCSV() {
         });
         tableHeader.appendChild(headerRow);
 
-        // Display initial page and set pagination
+        // Visualizza la prima pagina e crea i pulsanti di paginazione
         displayPage(currentPage);
         createPaginationButtons();
     } catch (error) {
-        console.error('Error loading CSV:', error);
+        console.error('Errore nel caricamento del CSV:', error);
     }
 }
 
-// Display a specific page of data
+// Funzione per visualizzare una pagina specifica di dati
 function displayPage(page, data = dataOffset) {
     const tableBody = document.getElementById('OffsetBody');
     tableBody.innerHTML = '';
@@ -89,7 +95,7 @@ function displayPage(page, data = dataOffset) {
 
     pageData.forEach(row => {
         const tr = document.createElement('tr');
-        const statoCell = row[row.length - 1].trim(); // Last cell in row
+        const statoCell = row[row.length - 1].trim(); // L'ultimo elemento della riga rappresenta lo stato
         tr.classList.add(statoCell === '1' ? 'checked-row' : 'unchecked-row');
         row.forEach((cell, index) => {
             const td = document.createElement('td');
@@ -108,7 +114,7 @@ function displayPage(page, data = dataOffset) {
     });
 }
 
-// Create pagination buttons
+// Funzione per creare i pulsanti di paginazione
 function createPaginationButtons(data = dataOffset) {
     const tableContainer = document.querySelector('.Due');
     let paginationContainer = document.querySelector('.pagination');
@@ -130,41 +136,41 @@ function createPaginationButtons(data = dataOffset) {
     tableContainer.appendChild(paginationContainer);
 }
 
-// Search and filter table function
+// Funzione di ricerca e filtraggio della tabella
 function searchTable() {
     const input = document.getElementById('tableSearch').value.toLowerCase();
     const filteredData = dataOffset.filter(row =>
         row.some(cell => cell.toLowerCase().includes(input))
     );
 
-    // Display filtered results, bypassing pagination if results fit in one page
+    // Visualizza i risultati filtrati senza paginazione se si adattano a una sola pagina
     if (filteredData.length <= rowsPerPage) {
         currentPage = 1;
         displayPage(1, filteredData);
-        document.querySelector('.pagination').style.display = 'none'; // Hide pagination
+        document.querySelector('.pagination').style.display = 'none'; // Nasconde la paginazione
     } else {
         displayPage(currentPage, filteredData);
-        createPaginationButtons(filteredData); // Show pagination for filtered results
-        document.querySelector('.pagination').style.display = ''; // Show pagination
+        createPaginationButtons(filteredData); // Mostra la paginazione per i risultati filtrati
+        document.querySelector('.pagination').style.display = ''; // Mostra la paginazione
     }
 }
 
-// Load and create pie chart for offset data
+// Funzione per caricare i dati del CSV e creare il grafico a torta
 function loadPieOffsetCSV() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
     const filePath = 'FileCSV/ElementOffset_Data.csv';
     const csvUrl = githubRawURL(repo, filePath);
 
     fetch(csvUrl)
-        .then(response => response.ok ? response.text() : Promise.reject('Network response was not OK'))
+        .then(response => response.ok ? response.text() : Promise.reject('Risposta di rete non OK'))
         .then(data => {
             const parsedData = Papa.parse(data, { header: true }).data;
             createPieChart(parsedData);
         })
-        .catch(error => console.error('Error fetching CSV file:', error));
+        .catch(error => console.error('Errore nel caricamento del CSV:', error));
 }
 
-// Create pie chart for the "Stato" column data
+// Funzione per creare il grafico a torta
 function createPieChart(data) {
     const labels = ['Verifiche Corrette', 'Verifiche Incorrette'];
     const values = [0, 0];
@@ -174,6 +180,7 @@ function createPieChart(data) {
         else if (row.Stato && row.Stato.trim() === '0') values[1]++;
     });
 
+    // Crea il grafico a torta
     const ctx = document.getElementById('OffsetGraficoATorta').getContext('2d');
     new Chart(ctx, {
         type: 'pie',
@@ -186,10 +193,12 @@ function createPieChart(data) {
             }]
         }
     });
+
+    // Mostra le statistiche sotto il grafico a torta
     displayStatistics(values[0] + values[1], values[0], values[1]);
 }
 
-// Funzione per mostrare le statistiche con percentuali
+// Funzione per mostrare le statistiche (totale, verificato, non verificato)
 function displayStatistics(total, verified, unverified) {
     const verifiedPercentage = ((verified / total) * 100).toFixed(2);
     const unverifiedPercentage = ((unverified / total) * 100).toFixed(2);
@@ -206,81 +215,37 @@ function displayStatistics(total, verified, unverified) {
     }
 }
 
-// Funzione per caricare i dati del CSV e creare l'istogramma grafico
+// Funzione per caricare i dati e creare l'istogramma
 function createBarChart() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
     const filePath = 'FileCSV/ElementOffset_Data.csv';
     const csvUrl = githubRawURL(repo, filePath);
 
     fetch(csvUrl)
-        .then(response => response.ok ? response.text() : Promise.reject('Errore nel caricamento del CSV'))
+        .then(response => response.ok ? response.text() : Promise.reject('Risposta di rete non OK'))
         .then(data => {
             const parsedData = Papa.parse(data, { header: true }).data;
+            // Dati per il grafico a barre
+            const labels = ['Verificato', 'Non Verificato'];
+            const counts = [0, 0];
 
-            // Raggruppa i dati per categoria e stato
-            const categories = {};
             parsedData.forEach(row => {
-                const category = row.Categoria || 'Altro';
-                const stato = row.Stato && row.Stato.trim() === '1' ? 'checked' : 'unchecked';
-
-                if (!categories[category]) {
-                    categories[category] = { checked: 0, unchecked: 0 };
-                }
-                categories[category][stato]++;
+                if (row.Stato === '1') counts[0]++;
+                else if (row.Stato === '0') counts[1]++;
             });
 
-            // Prepara i dati per Chart.js
-            const labels = Object.keys(categories);
-            const checkedData = labels.map(label => categories[label].checked);
-            const uncheckedData = labels.map(label => categories[label].unchecked);
-
-            // Crea il grafico a barre
-            const ctx = document.getElementById('pGIBarChart').getContext('2d');
+            const ctx = document.getElementById('OffsetGraficoBarre').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: labels,
-                    datasets: [
-                        {
-                            label: 'Verificato',
-                            data: checkedData,
-                            backgroundColor: '#36a2eb',
-                        },
-                        {
-                            label: 'Errore',
-                            data: uncheckedData,
-                            backgroundColor: '#ff6384',
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        title: {
-                            display: true,
-                            text: ''
-                        }
-                    },
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: ''
-                            }
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Numero di Elementi'
-                            },
-                            beginAtZero: true
-                        }
-                    }
+                    datasets: [{
+                        label: 'Verifiche Stato',
+                        data: counts,
+                        backgroundColor: ['#28a745', '#FF6384'],
+                    }]
                 }
             });
         })
-        .catch(error => console.error('Errore:', error));
+        .catch(error => console.error('Errore nel caricamento del CSV:', error));
 }
