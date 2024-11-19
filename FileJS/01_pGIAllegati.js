@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     loadpGICSV();
     loadOffsetCSV();
-    loadPieOffsetCSV()
+    loadPieOffsetCSV();
     createBarChart();
 });
 
@@ -189,6 +189,23 @@ function createPieChart(data) {
     displayStatistics(values[0] + values[1], values[0], values[1]);
 }
 
+// Funzione per mostrare le statistiche con percentuali
+function displayStatistics(total, verified, unverified) {
+    const verifiedPercentage = ((verified / total) * 100).toFixed(2);
+    const unverifiedPercentage = ((unverified / total) * 100).toFixed(2);
+
+    const statsContainer = document.getElementById('statistics');
+    if (statsContainer) {
+        statsContainer.innerHTML = `
+            <p><strong>Totale:</strong> ${total}</p>
+            <p><strong>Verificato:</strong> ${verified} (${verifiedPercentage}%)</p>
+            <p><strong>Non Verificato:</strong> ${unverified} (${unverifiedPercentage}%)</p>
+        `;
+    } else {
+        console.warn('Container per le statistiche non trovato');
+    }
+}
+
 // Funzione per caricare i dati del CSV e creare l'istogramma grafico
 function createBarChart() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
@@ -227,12 +244,12 @@ function createBarChart() {
                         {
                             label: 'Verificato',
                             data: checkedData,
-                            backgroundColor: '##d4edda',
+                            backgroundColor: '#36a2eb',
                         },
                         {
                             label: 'Errore',
                             data: uncheckedData,
-                            backgroundColor: '#f8d7da',
+                            backgroundColor: '#ff6384',
                         }
                     ]
                 },
@@ -267,6 +284,3 @@ function createBarChart() {
         })
         .catch(error => console.error('Errore:', error));
 }
-
-// Carica il grafico all'avvio
-document.addEventListener('DOMContentLoaded', createBarChart);
