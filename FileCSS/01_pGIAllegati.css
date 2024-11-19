@@ -116,7 +116,7 @@ input[type="checkbox"][disabled]:not(:checked)::after {
   display: block; /* Visualizzazione in blocco */
 }
 
-/* Istogramma */
+/* Grafico Istogramma */
 #pGIBarChart {
   margin: 20px auto;
   display: block;
