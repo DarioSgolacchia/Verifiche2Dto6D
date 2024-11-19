@@ -85,3 +85,17 @@ th {
 #statistics strong {
   font-weight: bold;
 }
+/* Grafico a torta */
+#OffsetGraficoATorta {
+  max-width: 70%; /* Limita la larghezza massima al 50% del contenitore */
+  width: 70%; /* Imposta la larghezza al 50% del contenitore */
+  margin: 0 auto; /* Centra il grafico */
+  display: block; /* Visualizzazione in blocco */
+}
+
+/* Istogramma */
+#pGIBarChart {
+  margin: 20px auto;
+  display: block;
+  max-width: 90%;
+}
