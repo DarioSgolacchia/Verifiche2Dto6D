@@ -1,17 +1,17 @@
 In/out,ID,Verifiche,Descrizione,Modalità,Formato,Percentuale,Stato
-X,1,pGI e Allegati,Verifica generale del Piano di Gestione Informativa e degli Allegati,MANU,-,0%,1
-X,2,Elaborati progettuali,Verifica coerenza generale dei Modelli ed elaborati,MANU,-,0%,0
-X,3,Clash Detection,Verifica delle interferenze geometriche tra modelli,CODE,ifc,0%,0
-X,4,Point Cloud,Verifica coerenza tra modelli e Nuvola di punti,ESTR,nativo,0%,0
-X,5,ACDat,Verifica e gestione dei file caricati in ACDat,MANU,nativo + ifc,0%,0
-X,6,Collegamenti modello nativo,Verifica dei collegamenti e compatibilità tra i file nativi,MANU,nativo,0%,0
-X,7,Georeferenziazione e Orientamento,Verifica del sistema di coordinate e orientamento del modello,MANU,nativo + ifc,0%,0
-X,8,Griglie e livelli,Verifica dei livelli e delle griglie rispetto alle specifiche,MANU,nativo,0%,0
-X,9,Infocad,Verifica e valorizzazione dei parametri informativi in Infocad,MANU,ifc,0%,0
-X,10,Integrità e pulizia file,Controllo e gestione dell'integrità dei file nativi e IFC,MANU,nativo + ifc,0%,0
-X,11,Verifica informativa,Verifica dei parametri informativi e di progetto nel modello,CODE,ifc,0%,0
-X,12,Verifica LOIN geometrico,Verifica del LOIN geometrico per gli elementi del modello,MANU,ifc,0%,0
-X,13,Naming Convention,Controllo della corretta applicazione delle convenzioni di naming nel modello,ESTR,ifc,0%,0
-X,14,Regole di modellazione,Verifica delle regole generali di modellazione per il progetto,ESTR,ifc,0%,0
-X,15,Regole specifiche modellazione impiantistica,Verifica delle regole di modellazione impiantistica,MANU,nativo,0%,0
-X,16,Unità di misura,Verifica dell'adozione delle unità di misura del Sistema metrico internazionale,MANU,nativo + ifc,0%,0
+X,1,pGI e Allegati,Verifica generale del Piano di Gestione Informativa e degli Allegati,,-,0%,1
+X,2,Elaborati progettuali,Verifica coerenza generale dei Modelli ed elaborati,,-,0%,0
+X,3,Clash Detection,Verifica delle interferenze geometriche tra modelli,,ifc,0%,0
+X,4,Point Cloud,Verifica coerenza tra modelli e Nuvola di punti,,nativo,0%,0
+X,5,ACDat,Verifica e gestione dei file caricati in ACDat,,nativo + ifc,0%,0
+X,6,Collegamenti modello nativo,Verifica dei collegamenti e compatibilità tra i file nativi,,nativo,0%,0
+X,7,Georeferenziazione e Orientamento,Verifica del sistema di coordinate e orientamento del modello,,nativo + ifc,0%,0
+X,8,Griglie e livelli,Verifica dei livelli e delle griglie rispetto alle specifiche,,nativo,0%,0
+X,9,Infocad,Verifica e valorizzazione dei parametri informativi in Infocad,,ifc,0%,0
+X,10,Integrità e pulizia file,Controllo e gestione dell'integrità dei file nativi e IFC,,nativo + ifc,0%,0
+X,11,Verifica informativa,Verifica dei parametri informativi e di progetto nel modello,,ifc,0%,0
+X,12,Verifica LOIN geometrico,Verifica del LOIN geometrico per gli elementi del modello,,ifc,0%,0
+X,13,Naming Convention,Controllo della corretta applicazione delle convenzioni di naming nel modello,,ifc,0%,0
+X,14,Regole di modellazione,Verifica delle regole generali di modellazione per il progetto,,ifc,0%,0
+X,15,Regole specifiche modellazione impiantistica,Verifica delle regole di modellazione impiantistica,,nativo,0%,0
+X,16,Unità di misura,Verifica dell'adozione delle unità di misura del Sistema metrico internazionale,,nativo + ifc,0%,0
