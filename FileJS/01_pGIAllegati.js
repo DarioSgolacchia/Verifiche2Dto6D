@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     loadpGICSV();
     loadOffsetCSV();
-    loadPieOffsetCSV()
+    loadPieOffsetCSV();
     createBarChart();
 });
 
@@ -189,6 +189,20 @@ function createPieChart(data) {
     displayStatistics(values[0] + values[1], values[0], values[1]);
 }
 
+// Funzione per mostrare le statistiche
+function displayStatistics(total, verified, unverified) {
+    const statsContainer = document.getElementById('statistics');
+    if (statsContainer) {
+        statsContainer.innerHTML = `
+            <p><strong>Totale:</strong> ${total}</p>
+            <p><strong>Verificato:</strong> ${verified}</p>
+            <p><strong>Non Verificato:</strong> ${unverified}</p>
+        `;
+    } else {
+        console.warn('Container per le statistiche non trovato');
+    }
+}
+
 // Funzione per caricare i dati del CSV e creare l'istogramma grafico
 function createBarChart() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
@@ -224,49 +238,21 @@ function createBarChart() {
                 data: {
                     labels: labels,
                     datasets: [
-                        {
-                            label: 'Verificato',
-                            data: checkedData,
-                            backgroundColor: '##d4edda',
-                        },
-                        {
-                            label: 'Errore',
-                            data: uncheckedData,
-                            backgroundColor: '#f8d7da',
-                        }
+                        { label: 'Checked', data: checkedData, backgroundColor: '#36a2eb' },
+                        { label: 'Unchecked', data: uncheckedData, backgroundColor: '#ff6384' }
                     ]
                 },
                 options: {
                     responsive: true,
                     plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        title: {
-                            display: true,
-                            text: ''
-                        }
+                        legend: { position: 'top' },
                     },
                     scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: ''
-                            }
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Numero di Elementi'
-                            },
-                            beginAtZero: true
-                        }
+                        x: { stacked: true },
+                        y: { stacked: true }
                     }
                 }
             });
         })
-        .catch(error => console.error('Errore:', error));
+        .catch(error => console.error('Errore nella creazione del grafico a barre:', error));
 }
-
-// Carica il grafico all'avvio
-document.addEventListener('DOMContentLoaded', createBarChart);
