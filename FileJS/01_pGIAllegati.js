@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadpGICSV();
     loadOffsetCSV();
     loadPieOffsetCSV()
-    createBarChartCSV();
+    createBarChart();
 });
 
 const githubRawURL = (repo, filePath) => `https://raw.githubusercontent.com/${repo}/main/${filePath}`;
@@ -189,8 +189,8 @@ function createPieChart(data) {
     displayStatistics(values[0] + values[1], values[0], values[1]);
 }
 
-// Funzione per caricare i dati del CSV e creare l'istogramma per la colonna "Stato"
-function createBarChartCSV() {
+// Funzione per caricare i dati del CSV e creare l'istogramma
+function createBarChart() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
     const filePath = 'FileCSV/ElementOffset_Data.csv';
     const csvUrl = githubRawURL(repo, filePath);
@@ -269,4 +269,4 @@ function createBarChartCSV() {
 }
 
 // Carica il grafico all'avvio
-document.addEventListener('DOMContentLoaded', createBarChartCSV);
+document.addEventListener('DOMContentLoaded', createBarChart);
