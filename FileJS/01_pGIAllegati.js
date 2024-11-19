@@ -225,14 +225,14 @@ function createBarChart() {
                     labels: labels,
                     datasets: [
                         {
-                            label: 'Checkati (Verdi)',
+                            label: 'Verificato',
                             data: checkedData,
-                            backgroundColor: '#28a745',
+                            backgroundColor: '##d4edda',
                         },
                         {
-                            label: 'Non Checkati (Rossi)',
+                            label: 'Errore',
                             data: uncheckedData,
-                            backgroundColor: '#dc3545',
+                            backgroundColor: '#f8d7da',
                         }
                     ]
                 },
@@ -244,14 +244,14 @@ function createBarChart() {
                         },
                         title: {
                             display: true,
-                            text: 'Istogramma'
+                            text: ''
                         }
                     },
                     scales: {
                         x: {
                             title: {
                                 display: true,
-                                text: 'Categoria'
+                                text: ''
                             }
                         },
                         y: {
