@@ -199,20 +199,10 @@ function createPieChart(data) {
 }
 
 // Funzione per mostrare le statistiche (totale, verificato, non verificato)
-function displayStatistics(total, verified, unverified) {
-    const verifiedPercentage = total > 0 ? ((verified / total) * 100).toFixed(2) : 0;
-    const unverifiedPercentage = total > 0 ? ((unverified / total) * 100).toFixed(2) : 0;
-
-    const statsContainer = document.getElementById('statistics');
-    if (statsContainer) {
-        statsContainer.innerHTML = `
-            <p><strong>Totale:</strong> ${total}</p>
-            <p><strong>Verificato:</strong> ${verified} (${verifiedPercentage}%)</p>
-            <p><strong>Non Verificato:</strong> ${unverified} (${unverifiedPercentage}%)</p>
-        `;
-    } else {
-        console.warn('Container per le statistiche non trovato');
-    }
+function displayStatistics(total, stato1, stato0) {
+    const percentCorrect = ((stato1 / total) * 100).toFixed(2); // Calcola la percentuale
+    const stats = `Totale elementi: ${total}<br>Verifiche corrette: ${stato1} (${percentCorrect}%)<br>Verifiche da correggere: ${stato0}`;
+    document.getElementById('statistics').innerHTML = stats;
 }
 
 // Funzione per caricare i dati e creare l'istogramma
