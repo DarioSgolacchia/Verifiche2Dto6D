@@ -200,8 +200,8 @@ function createPieChart(data) {
 
 // Funzione per mostrare le statistiche (totale, verificato, non verificato)
 function displayStatistics(total, verified, unverified) {
-    const verifiedPercentage = ((verified / total) * 100).toFixed(2);
-    const unverifiedPercentage = ((unverified / total) * 100).toFixed(2);
+    const verifiedPercentage = total > 0 ? ((verified / total) * 100).toFixed(2) : 0;
+    const unverifiedPercentage = total > 0 ? ((unverified / total) * 100).toFixed(2) : 0;
 
     const statsContainer = document.getElementById('statistics');
     if (statsContainer) {
