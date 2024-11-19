@@ -45,7 +45,7 @@ function loadGeoreferenziazioneCSV() {
                 console.error('GeoreferenziazioneHeader o GeoreferenziazioneBody non trovati nel DOM');
             }
         })
-        .catch(error => console.error('Error fetching CSV file:', error));
+        .catch(error => console.error('Errore durante il fetch del file CSV:', error));
 }
 
 // Georeferenziazione
@@ -94,7 +94,7 @@ function loadCoordinationCSV() {
                 console.error('CoordinationHeader o CoordinationBody non trovati nel DOM');
             }
         })
-        .catch(error => console.error('Error fetching CSV file:', error));
+        .catch(error => console.error('Errore durante il fetch del file CSV:', error));
 }
 
 function addComparisonRow(data, tableBody) {
