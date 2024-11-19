@@ -269,4 +269,4 @@ function createBarChartCSV() {
 }
 
 // Carica il grafico all'avvio
-document.addEventListener('DOMContentLoaded', createBarChart);
+document.addEventListener('DOMContentLoaded', createBarChartCSV);
