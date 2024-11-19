@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM completamente caricato.");
-    loadElaboratiGeoreferenziazioneCSV();
+    loadGeoreferenziazioneCSV();
     loadCoordinationCSV();
 });
 
 const githubRawURL = (repo, filePath) => `https://raw.githubusercontent.com/${repo}/main/${filePath}`;
 
 // Orientamento
-function loadElaboratiGeoreferenziazioneCSV() {
+function loadGeoreferenziazioneCSV() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
     const filePath = 'FileCSV/Georeferenziazione.csv';
     const csvUrl = githubRawURL(repo, filePath);
