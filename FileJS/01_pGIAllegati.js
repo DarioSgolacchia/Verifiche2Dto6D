@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     loadpGICSV();
     loadOffsetCSV();
-    loadPieOffsetCSV();
+    loadPieOffsetCSV()
+    createBarChart();
 });
 
 const githubRawURL = (repo, filePath) => `https://raw.githubusercontent.com/${repo}/main/${filePath}`;
@@ -194,3 +195,85 @@ function displayStatistics(total, stato1, stato0) {
     const stats = `Totale elementi: ${total}<br>Verifiche corrette: ${stato1} (${percentCorrect}%)<br>Verifiche da correggere: ${stato0}`;
     document.getElementById('Offsetstatistics').innerHTML = stats;
 }
+
+// Funzione per caricare i dati del CSV e creare l'istogramma
+function createBarChart() {
+    const repo = 'DarioSgolacchia/Verifiche2Dto6D';
+    const filePath = 'FileCSV/ElementOffset_Data.csv';
+    const csvUrl = githubRawURL(repo, filePath);
+
+    fetch(csvUrl)
+        .then(response => response.ok ? response.text() : Promise.reject('Errore nel caricamento del CSV'))
+        .then(data => {
+            const parsedData = Papa.parse(data, { header: true }).data;
+
+            // Raggruppa i dati per categoria e stato
+            const categories = {};
+            parsedData.forEach(row => {
+                const category = row.Categoria || 'Altro';
+                const stato = row.Stato && row.Stato.trim() === '1' ? 'checked' : 'unchecked';
+
+                if (!categories[category]) {
+                    categories[category] = { checked: 0, unchecked: 0 };
+                }
+                categories[category][stato]++;
+            });
+
+            // Prepara i dati per Chart.js
+            const labels = Object.keys(categories);
+            const checkedData = labels.map(label => categories[label].checked);
+            const uncheckedData = labels.map(label => categories[label].unchecked);
+
+            // Crea il grafico a barre
+            const ctx = document.getElementById('pGIBarChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Checkati (Verdi)',
+                            data: checkedData,
+                            backgroundColor: '#28a745',
+                        },
+                        {
+                            label: 'Non Checkati (Rossi)',
+                            data: uncheckedData,
+                            backgroundColor: '#dc3545',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Istogramma'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Categoria'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Numero di Elementi'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Errore:', error));
+}
+
+// Carica il grafico all'avvio
+document.addEventListener('DOMContentLoaded', createBarChart);

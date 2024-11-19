@@ -115,3 +115,10 @@ input[type="checkbox"][disabled]:not(:checked)::after {
   margin: 0 auto; /* Centra il grafico */
   display: block; /* Visualizzazione in blocco */
 }
+
+/* Istogramma */
+#pGIBarChart {
+  margin: 20px auto;
+  display: block;
+  max-width: 90%;
+}
