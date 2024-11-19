@@ -189,7 +189,7 @@ function createPieChart(data) {
     displayStatistics(values[0] + values[1], values[0], values[1]);
 }
 
-// Funzione per caricare i dati del CSV e creare l'istogramma come grafico
+// Funzione per caricare i dati del CSV e creare l'istogramma per la colonna "Stato"
 function createBarChartCSV() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
     const filePath = 'FileCSV/ElementOffset_Data.csv';

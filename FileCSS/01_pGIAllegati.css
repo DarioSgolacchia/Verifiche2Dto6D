@@ -117,7 +117,7 @@ input[type="checkbox"][disabled]:not(:checked)::after {
 }
 
 /* Grafico per Istogramma */
-#pGIBarChart {
+#pGIBarChartCSV {
   margin: 20px auto;
   display: block;
   max-width: 90%;
