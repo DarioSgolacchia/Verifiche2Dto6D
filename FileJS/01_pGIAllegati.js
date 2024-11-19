@@ -189,13 +189,6 @@ function createPieChart(data) {
     displayStatistics(values[0] + values[1], values[0], values[1]);
 }
 
-// Display statistics of correct/incorrect items
-function displayStatistics(total, stato1, stato0) {
-    const percentCorrect = ((stato1 / total) * 100).toFixed(2);
-    const stats = `Totale elementi: ${total}<br>Verifiche corrette: ${stato1} (${percentCorrect}%)<br>Verifiche da correggere: ${stato0}`;
-    document.getElementById('Offsetstatistics').innerHTML = stats;
-}
-
 // Funzione per caricare i dati del CSV e creare l'istogramma
 function createBarChart() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
