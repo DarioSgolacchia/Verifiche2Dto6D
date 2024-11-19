@@ -206,9 +206,9 @@ function displayStatistics(total, verified, unverified) {
     const statsContainer = document.getElementById('statistics');
     if (statsContainer) {
         statsContainer.innerHTML = `
-            <p><strong>Totale:</strong> ${total}</p>
-            <p><strong>Verificato:</strong> ${verified} (${verifiedPercentage}%)</p>
-            <p><strong>Non Verificato:</strong> ${unverified} (${unverifiedPercentage}%)</p>
+            <p><strong>Elementi Totale controllati:</strong> ${total}</p>
+            <p><strong>Elementi Corretti:</strong> ${verified} (${verifiedPercentage}%)</p>
+            <p><strong>Elementi Errati:</strong> ${unverified} (${unverifiedPercentage}%)</p>
         `;
     } else {
         console.warn('Container per le statistiche non trovato');
