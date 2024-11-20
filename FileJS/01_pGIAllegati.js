@@ -10,6 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
     loadPieOffsetCSV();
 });
 
+// Funzione per ottenere l'URL raw di GitHub
+function githubRawURL(repo, filePath) {
+    return `https://raw.githubusercontent.com/${repo}/master/${filePath}`;
+}
+
 // Corregge il riferimento al canvas per l'istogramma
 function createBarChart() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
@@ -184,9 +189,4 @@ function populateOffsetTable(data) {
 
     header.innerHTML = '<tr>' + Object.keys(data[0]).map(col => `<th>${col}</th>`).join('') + '</tr>';
     body.innerHTML = data.map(row => `<tr>${Object.values(row).map(val => `<td>${val}</td>`).join('')}</tr>`).join('');
-}
-
-// Funzione per ottenere l'URL raw di GitHub
-function githubRawURL(repo, filePath) {
-    return `https://raw.githubusercontent.com/${repo}/master/${filePath}`;
 }
