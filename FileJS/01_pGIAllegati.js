@@ -1,192 +1,272 @@
 document.addEventListener('DOMContentLoaded', () => {
-    if (typeof createBarChart === 'function') {
-        createBarChart(); // Richiama la funzione per creare il grafico a barre
-    } else {
-        console.error('createBarChart non è definita.');
-    }
-
     loadpGICSV();
     loadOffsetCSV();
-    loadPieOffsetCSV();
+    loadPieOffsetCSV()
+    createBarChart();
 });
 
-// Funzione per ottenere l'URL raw di GitHub
-function githubRawURL(repo, filePath) {
-    return `https://raw.githubusercontent.com/${repo}/master/${filePath}`;
+const githubRawURL = (repo, filePath) => 'https://raw.githubusercontent.com/${repo}/main/${filePath}';
+
+// Constants and Variables
+const rowsPerPage = 15; // Maximum rows per page
+let currentPage = 1;
+let dataOffset = []; // Array for storing the CSV data
+
+// Load pGI Allegati CSV : pGIAllegati.csv
+function loadpGICSV() {
+    const repo = 'DarioSgolacchia/Verifiche2Dto6D';
+    const filePath = 'FileCSV/pGIAllegati.csv';
+    const csvUrl = githubRawURL(repo, filePath);
+
+    fetch(csvUrl)
+        .then(response => response.ok ? response.text() : Promise.reject('Network response was not OK'))
+        .then(data => {
+            const parsedData = Papa.parse(data, { header: false }).data;
+            const tableHeader = document.getElementById('pGIHeader');
+            const tableBody = document.getElementById('pGIBody');
+            if (tableHeader && tableBody) {
+                tableHeader.innerHTML = '';
+                tableBody.innerHTML = '';
+                parsedData[0].forEach(cell => {
+                    const th = document.createElement('th');
+                    th.textContent = cell;
+                    tableHeader.appendChild(th);
+                });
+                parsedData.slice(1).forEach(row => {
+                    const tr = document.createElement('tr');
+                    row.forEach(cell => {
+                        const td = document.createElement('td');
+                        td.textContent = cell;
+                        tr.appendChild(td);
+                    });
+                    tableBody.appendChild(tr);
+                });
+            } else {
+                console.error('pGIHeader or pGIBody not found in DOM');
+            }
+        })
+        .catch(error => console.error('Error fetching CSV file:', error));
 }
 
-// Corregge il riferimento al canvas per l'istogramma
+// Load Offset CSV : ElementOffset_Data.csv
+async function loadOffsetCSV() {
+    const repo = 'DarioSgolacchia/Verifiche2Dto6D';
+    const filePath = 'FileCSV/ElementOffset_Data.csv';
+    const csvUrl = githubRawURL(repo, filePath);
+
+    try {
+        const response = await fetch(csvUrl);
+        if (!response.ok) throw new Error('Network response was not OK');
+        const data = await response.text();
+        const rows = data.trim().split('\n').map(row => row.split(','));
+        const tableHeader = document.getElementById('OffsetHeader');
+        dataOffset = rows.slice(1); // Store data for pagination
+
+        // Create table header
+        const headerRow = document.createElement('tr');
+        rows[0].forEach(headerCell => {
+            const th = document.createElement('th');
+            th.textContent = headerCell;
+            headerRow.appendChild(th);
+        });
+        tableHeader.appendChild(headerRow);
+
+        // Display initial page and set pagination
+        displayPage(currentPage);
+        createPaginationButtons();
+    } catch (error) {
+        console.error('Error loading CSV:', error);
+    }
+}
+
+// Display a specific page of data
+function displayPage(page, data = dataOffset) {
+    const tableBody = document.getElementById('OffsetBody');
+    tableBody.innerHTML = '';
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    const pageData = data.slice(start, end);
+
+    pageData.forEach(row => {
+        const tr = document.createElement('tr');
+        const statoCell = row[row.length - 1].trim(); // Last cell in row
+        tr.classList.add(statoCell === '1' ? 'checked-row' : 'unchecked-row');
+        row.forEach((cell, index) => {
+            const td = document.createElement('td');
+            if (index === row.length - 1) {
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.disabled = true;
+                checkbox.checked = statoCell === '1';
+                td.appendChild(checkbox);
+            } else {
+                td.textContent = cell;
+            }
+            tr.appendChild(td);
+        });
+        tableBody.appendChild(tr);
+    });
+}
+
+// Create pagination buttons
+function createPaginationButtons(data = dataOffset) {
+    const tableContainer = document.querySelector('.Due');
+    let paginationContainer = document.querySelector('.pagination');
+    if (paginationContainer) paginationContainer.remove();
+
+    paginationContainer = document.createElement('div');
+    paginationContainer.className = 'pagination';
+
+    const totalPages = Math.ceil(data.length / rowsPerPage);
+    for (let i = 1; i <= totalPages; i++) {
+        const button = document.createElement('button');
+        button.textContent = i;
+        button.addEventListener('click', () => {
+            currentPage = i;
+            displayPage(currentPage, data);
+        });
+        paginationContainer.appendChild(button);
+    }
+    tableContainer.appendChild(paginationContainer);
+}
+
+// Search and filter table function
+function searchTable() {
+    const input = document.getElementById('tableSearch').value.toLowerCase();
+    const filteredData = dataOffset.filter(row =>
+        row.some(cell => cell.toLowerCase().includes(input))
+    );
+
+    // Display filtered results, bypassing pagination if results fit in one page
+    if (filteredData.length <= rowsPerPage) {
+        currentPage = 1;
+        displayPage(1, filteredData);
+        document.querySelector('.pagination').style.display = 'none'; // Hide pagination
+    } else {
+        displayPage(currentPage, filteredData);
+        createPaginationButtons(filteredData); // Show pagination for filtered results
+        document.querySelector('.pagination').style.display = ''; // Show pagination
+    }
+}
+
+// Load and create pie chart for offset data
+function loadPieOffsetCSV() {
+    const repo = 'DarioSgolacchia/Verifiche2Dto6D';
+    const filePath = 'FileCSV/ElementOffset_Data.csv';
+    const csvUrl = githubRawURL(repo, filePath);
+
+    fetch(csvUrl)
+        .then(response => response.ok ? response.text() : Promise.reject('Network response was not OK'))
+        .then(data => {
+            const parsedData = Papa.parse(data, { header: true }).data;
+            createPieChart(parsedData);
+        })
+        .catch(error => console.error('Error fetching CSV file:', error));
+}
+
+// Create pie chart for the "Stato" column data
+function createPieChart(data) {
+    const labels = ['Verifiche Corrette', 'Verifiche Incorrette'];
+    const values = [0, 0];
+
+    data.forEach(row => {
+        if (row.Stato && row.Stato.trim() === '1') values[0]++;
+        else if (row.Stato && row.Stato.trim() === '0') values[1]++;
+    });
+
+    const ctx = document.getElementById('OffsetGraficoATorta').getContext('2d');
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Distribuzione Stato',
+                data: values,
+                backgroundColor: ['#d4edda', '#FF6384'],
+            }]
+        }
+    });
+    displayStatistics(values[0] + values[1], values[0], values[1]);
+}
+
+// Funzione per caricare i dati del CSV e creare l'istogramma come grafico
 function createBarChart() {
     const repo = 'DarioSgolacchia/Verifiche2Dto6D';
     const filePath = 'FileCSV/ElementOffset_Data.csv';
     const csvUrl = githubRawURL(repo, filePath);
 
     fetch(csvUrl)
-        .then(response => response.ok ? response.text() : Promise.reject('Risposta di rete non OK'))
+        .then(response => response.ok ? response.text() : Promise.reject('Errore nel caricamento del CSV'))
         .then(data => {
             const parsedData = Papa.parse(data, { header: true }).data;
-            const labels = ['Verificato', 'Non Verificato'];
-            const counts = [0, 0];
 
+            // Raggruppa i dati per categoria e stato
+            const categories = {};
             parsedData.forEach(row => {
-                if (row.Stato === '1') counts[0]++;
-                else if (row.Stato === '0') counts[1]++;
+                const category = row.Categoria || 'Altro';
+                const stato = row.Stato && row.Stato.trim() === '1' ? 'checked' : 'unchecked';
+
+                if (!categories[category]) {
+                    categories[category] = { checked: 0, unchecked: 0 };
+                }
+                categories[category][stato]++;
             });
 
-            const ctx = document.getElementById('pGIBarChart').getContext('2d'); // ID corretto
+            // Prepara i dati per Chart.js
+            const labels = Object.keys(categories);
+            const checkedData = labels.map(label => categories[label].checked);
+            const uncheckedData = labels.map(label => categories[label].unchecked);
+
+            // Crea il grafico a barre
+            const ctx = document.getElementById('pGIBarChart').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: labels,
-                    datasets: [{
-                        label: 'Verifiche Stato',
-                        data: counts,
-                        backgroundColor: ['#28a745', '#FF6384'],
-                    }]
+                    datasets: [
+                        {
+                            label: 'Checkati (Verdi)',
+                            data: checkedData,
+                            backgroundColor: '#28a745',
+                        },
+                        {
+                            label: 'Non Checkati (Rossi)',
+                            data: uncheckedData,
+                            backgroundColor: '#dc3545',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Istogramma'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Categoria'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Numero di Elementi'
+                            },
+                            beginAtZero: true
+                        }
+                    }
                 }
             });
         })
-        .catch(error => console.error('Errore nel caricamento del CSV:', error));
+        .catch(error => console.error('Errore:', error));
 }
 
-// Funzione per caricare il CSV di pGI
-function loadpGICSV() {
-    const repo = 'DarioSgolacchia/Verifiche2Dto6D';
-    const filePath = 'FileCSV/pGI_Data.csv';
-    const csvUrl = githubRawURL(repo, filePath);
-
-    Papa.parse(csvUrl, {
-        download: true,
-        header: true,
-        complete: (results) => {
-            populatepGITable(results.data);
-        },
-        error: (error) => {
-            console.error('Errore nel caricamento del CSV di pGI:', error);
-        }
-    });
-}
-
-// Funzione per caricare il CSV degli Offset
-function loadOffsetCSV() {
-    const repo = 'DarioSgolacchia/Verifiche2Dto6D';
-    const filePath = 'FileCSV/ElementOffset_Data.csv';
-    const csvUrl = githubRawURL(repo, filePath);
-
-    Papa.parse(csvUrl, {
-        download: true,
-        header: true,
-        complete: (results) => {
-            populateOffsetTable(results.data);
-        },
-        error: (error) => {
-            console.error('Errore nel caricamento del CSV degli Offset:', error);
-        }
-    });
-}
-
-// Funzione per caricare i dati del grafico a torta e le statistiche
-function loadPieOffsetCSV() {
-    const repo = 'DarioSgolacchia/Verifiche2Dto6D';
-    const filePath = 'FileCSV/ElementOffset_Data.csv';
-    const csvUrl = githubRawURL(repo, filePath);
-
-    Papa.parse(csvUrl, {
-        download: true,
-        header: true,
-        complete: (results) => {
-            const data = results.data;
-            if (data.length === 0) {
-                console.error('Nessun dato trovato nel CSV.');
-                return;
-            }
-
-            const total = data.length;
-            const verified = data.filter(row => row.Stato === '1').length;
-            const unverified = data.filter(row => row.Stato === '0').length;
-
-            if (total > 0) {
-                createPieChart(verified, unverified);
-                displayStatistics(total, verified, unverified);
-            } else {
-                console.warn('Nessun dato valido trovato per creare i grafici.');
-            }
-        },
-        error: (error) => {
-            console.error('Errore nel caricamento del CSV per il grafico a torta:', error);
-        }
-    });
-}
-
-// Funzione per creare il grafico a torta
-function createPieChart(verified, unverified) {
-    const ctx = document.getElementById('OffsetGraficoATorta').getContext('2d');
-    new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['Verificato', 'Non Verificato'],
-            datasets: [{
-                data: [verified, unverified],
-                backgroundColor: ['#28a745', '#FF6384'],
-            }]
-        },
-        options: {
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'bottom', // Posizione della legenda
-                },
-                tooltip: {
-                    enabled: true, // Abilita tooltip
-                },
-            },
-        },
-    });
-}
-
-// Funzione per visualizzare le statistiche
-function displayStatistics(total, verified, unverified) {
-    console.log("Statistiche:", { total, verified, unverified });
-    const statsContainer = document.getElementById('statistics');
-    if (!statsContainer) {
-        console.warn('Elemento #statistics non trovato nel DOM.');
-        return;
-    }
-
-    const verifiedPercentage = total > 0 ? ((verified / total) * 100).toFixed(2) : '0.00';
-    const unverifiedPercentage = total > 0 ? ((unverified / total) * 100).toFixed(2) : '0.00';
-
-    statsContainer.innerHTML = `
-        <p><strong>Totale:</strong> ${total}</p>
-        <p><strong>Verificato:</strong> ${verified} (${verifiedPercentage}%)</p>
-        <p><strong>Non Verificato:</strong> ${unverified} (${unverifiedPercentage}%)</p>
-    `;
-}
-
-// Funzione per popolare la tabella pGI
-function populatepGITable(data) {
-    const header = document.getElementById('pGIHeader');
-    const body = document.getElementById('pGIBody');
-
-    if (!header || !body) {
-        console.error('Elementi della tabella pGI non trovati.');
-        return;
-    }
-
-    header.innerHTML = '<tr>' + Object.keys(data[0]).map(col => `<th>${col}</th>`).join('') + '</tr>';
-    body.innerHTML = data.map(row => `<tr>${Object.values(row).map(val => `<td>${val}</td>`).join('')}</tr>`).join('');
-}
-
-// Funzione per popolare la tabella Offset
-function populateOffsetTable(data) {
-    const header = document.getElementById('OffsetHeader');
-    const body = document.getElementById('OffsetBody');
-
-    if (!header || !body) {
-        console.error('Elementi della tabella Offset non trovati.');
-        return;
-    }
-
-    header.innerHTML = '<tr>' + Object.keys(data[0]).map(col => `<th>${col}</th>`).join('') + '</tr>';
-    body.innerHTML = data.map(row => `<tr>${Object.values(row).map(val => `<td>${val}</td>`).join('')}</tr>`).join('');
-}
+// Carica il grafico all'avvio
+document.addEventListener('DOMContentLoaded', createBarChart);

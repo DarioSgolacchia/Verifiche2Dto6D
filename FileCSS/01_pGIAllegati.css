@@ -1,89 +1,112 @@
-/* Stile generale per la pagina */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  color: #333;
-  margin: 0;
-  padding: 0;
-}
-
-/* Sezione per la tabella */
-table {
+/* Stili per tabelle */
+.pGI,
+.Offset {
   width: 100%;
+  table-layout: fixed;
+  margin: 0 auto;
   border-collapse: collapse;
-  margin-bottom: 30px; /* Spazio inferiore tra le tabelle e altri elementi */
 }
 
-th, td {
-  padding: 10px;
-  text-align: left;
-  border: 1px solid #ddd;
-}
-
-th {
+.pGI th,
+.Offset th {
   background-color: #f2f2f2;
-  font-weight: bold;
-}
-
-/* Evidenziazione delle righe con stato "corretto" */
-.checked-row {
-  background-color: #d4edda; /* Verde chiaro per la riga corretta */
-}
-
-/* Evidenziazione delle righe con stato "errato" */
-.unchecked-row {
-  background-color: #f8d7da; /* Rosso chiaro per la riga errata */
-}
-
-/* Stile per la paginazione delle tabelle */
-.pagination {
   text-align: center;
-  margin-top: 20px;
+  padding: 10px;
+}
+
+.pGI td,
+.Offset td {
+  border: 1px solid #000;
+  text-align: center;
+  padding: 8px;
+  word-wrap: break-word;
+}
+
+.pGI,
+td,
+.pGI th {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* Colori per stato */
+.checked-row {
+  background-color: #d4edda;
+}
+
+.unchecked-row {
+  background-color: #f8d7da;
+}
+
+/* Stili per checkbox disabilitati */
+input[type="checkbox"][disabled] {
+  opacity: 1;
+  background-color: white;
+  border: 2px solid white;
+  border-radius: 3px;
+}
+
+input[type="checkbox"][disabled] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background-color: #d4edda;
+  border: 2px solid #d4edda;
+  border-radius: 3px;
+  display: inline-block;
+  position: relative;
+}
+
+input[type="checkbox"][disabled]:checked {
+  background-color: #008000;
+  border: 2px solid #008000;
+}
+
+input[type="checkbox"][disabled]:not(:checked) {
+  background-color: #ff6384;
+  border: 2px solid #ff6384;
+}
+
+input[type="checkbox"][disabled]:checked::after {
+  content: "✓";
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+input[type="checkbox"][disabled]:not(:checked)::after {
+  content: "X";
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .pagination button {
-  padding: 5px 10px;
   margin: 0 5px;
-  border: 1px solid #ddd;
-  background-color: #f2f2f2;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: white;
   cursor: pointer;
 }
 
 .pagination button:hover {
-  background-color: #ddd; /* Colore di sfondo al passaggio del mouse */
+  background-color: gray;
 }
 
-/* Stile per il campo di ricerca della tabella */
-#tableSearch {
-  padding: 5px 10px;
-  margin-bottom: 20px;
-  width: 100%;
-  font-size: 16px;
-  border: 1px solid #ddd;
-}
-
-/* Sezione per i grafici */
-#OffsetGraficoATorta, #OffsetGraficoBarre {
-  width: 100%;
-  max-width: 600px; /* Impostato un massimo di larghezza per i grafici */
-  height: 400px;
-  margin: 0 auto 30px; /* Centra il grafico e aggiunge uno spazio inferiore */
-}
-
-/* Stile per la sezione delle statistiche sotto al grafico a torta */
-#statistics {
-  text-align: center;
-  font-size: 16px;
-  margin-top: 20px;
-}
-
-#statistics p {
-  margin: 5px 0;
-}
-
-/* Testo in grassetto per evidenziare le statistiche */
-#statistics strong {
-  font-weight: bold;
+.pagination button:active {
+  background-color: #ccc;
 }
 /* Grafico a torta */
 #OffsetGraficoATorta {
@@ -93,7 +116,7 @@ th {
   display: block; /* Visualizzazione in blocco */
 }
 
-/* Istogramma */
+/* Grafico Istogramma */
 #pGIBarChart {
   margin: 20px auto;
   display: block;

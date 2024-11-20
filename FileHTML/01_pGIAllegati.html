@@ -17,9 +17,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Script JavaScript -->
+    <script src="https://cdn.jsdelivr.net/gh/DarioSgolacchia/Verifiche2Dto6D/FileJS/01_pGIAllegati.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/DarioSgolacchia/Verifiche2Dto6D/FileJS/01_pGIAllegati.js" defer></script>
 </head>
 
 <body>
@@ -47,28 +47,26 @@
             <p>Resoconto Verifiche</p>
             <table class="pGI">
                 <thead id="pGIHeader"></thead>
-                <tbody id="pGIBody"></tbody>
+                <thead id="pGIBody"></thead>
             </table>
+            <h3>Istogramma</h3>
+            <canvas id="pGIBarChart" width="800" height="400"></canvas>
         </article>
         <article class="Due">
-            <h2>Verifica elementi su livello</h2>
+            <h2>Prova</h2>
             <div class="search-container">
                 <label for="tableSearch">Cerca: </label>
                 <input type="text" id="tableSearch" onkeyup="searchTable()" placeholder="Cerca...">
             </div>
-            <br>
             <table class="Offset">
                 <thead id="OffsetHeader"></thead>
                 <tbody id="OffsetBody"></tbody>
             </table>
         </article>
         <article class="Tre">
-            <h1>Grafico</h1>
-            <h2>Estratti i valori totali</h2>
+            <h2>Grafico</h2>
             <canvas id="OffsetGraficoATorta" width="400" height="400"></canvas>
-            <div id="statistics"></div>
-            <h2>Istogramma</h2>
-            <canvas id="pGIBarChart" width="800" height="400"></canvas>
+            <div id="Offsetstatistics"></div>
         </article>
     </section>
 </body>
