@@ -1,6 +1,6 @@
 In/out,Raggruppamento,Descrizione,Modalità,Formato,Percentuale,Stato
-X,pGI e Allegati,Verifica generale del Piano di Gestione Informativa e degli Allegati,,-,0%,0
-X,Elaborati Progettuali,Verifica coerenza generale dei Modelli ed elaborati,,-,0%,0
+X,pGI e Allegati,Verifica generale del Piano di Gestione Informativa e degli Allegati,,-,0%,1
+X,Elaborati Progettuali,Verifica coerenza generale dei Modelli ed elaborati,,-,0%,2
 X,Clash Detection,Verifica delle interferenze geometriche tra modelli,,ifc,0%,0
 X,Point Cloud,Verifica coerenza tra modelli e Nuvola di punti,,Nativo,0%,0
 X,ACDat,Verifica e gestione dei file caricati in ACDat,,Nativo + ifc,0%,0
