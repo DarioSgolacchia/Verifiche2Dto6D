@@ -91,12 +91,21 @@ function loadPieOffsetCSV() {
         header: true,
         complete: (results) => {
             const data = results.data;
+            if (data.length === 0) {
+                console.error('Nessun dato trovato nel CSV.');
+                return;
+            }
+
             const total = data.length;
             const verified = data.filter(row => row.Stato === '1').length;
             const unverified = data.filter(row => row.Stato === '0').length;
 
-            createPieChart(verified, unverified);
-            displayStatistics(total, verified, unverified);
+            if (total > 0) {
+                createPieChart(verified, unverified);
+                displayStatistics(total, verified, unverified);
+            } else {
+                console.warn('Nessun dato valido trovato per creare i grafici.');
+            }
         },
         error: (error) => {
             console.error('Errore nel caricamento del CSV per il grafico a torta:', error);
@@ -115,7 +124,18 @@ function createPieChart(verified, unverified) {
                 data: [verified, unverified],
                 backgroundColor: ['#28a745', '#FF6384'],
             }]
-        }
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom', // Posizione della legenda
+                },
+                tooltip: {
+                    enabled: true, // Abilita tooltip
+                },
+            },
+        },
     });
 }
 
@@ -128,8 +148,8 @@ function displayStatistics(total, verified, unverified) {
         return;
     }
 
-    const verifiedPercentage = ((verified / total) * 100).toFixed(2);
-    const unverifiedPercentage = ((unverified / total) * 100).toFixed(2);
+    const verifiedPercentage = total > 0 ? ((verified / total) * 100).toFixed(2) : '0.00';
+    const unverifiedPercentage = total > 0 ? ((unverified / total) * 100).toFixed(2) : '0.00';
 
     statsContainer.innerHTML = `
         <p><strong>Totale:</strong> ${total}</p>
