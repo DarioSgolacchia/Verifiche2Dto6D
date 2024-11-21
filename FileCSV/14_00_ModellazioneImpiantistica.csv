@@ -1,2 +1,5 @@
-ID,Raggruppamento,Descrizione,Modalità,Formato,Percentuale
-1,Regole specifiche modellazione impiantistica,Verifica delle regole di modellazione impiantistica,MANU,nativo,0%
+In/Out,ID,Raggruppamento,Descrizione,Formato,Percentuale
+X,58,Regole specifiche modellazione impiantistica,Tutti gli elementi impiantistici sono assegnati a circuiti o sistemi della disciplina a cui appartengono,ifc,0%
+X,59,Regole specifiche modellazione impiantistica,Assenza di estremità aperte delle reti impiantistiche,Nativo,0%
+X,60,Regole specifiche modellazione impiantistica,Tutti gli elementi impiantistici sono collegati tra loro,Nativo,0%
+X,61,Regole specifiche modellazione impiantistica,Tutti gli elementi impiantistici sono categorizzati come da indicazioni pGI,ifc,0%

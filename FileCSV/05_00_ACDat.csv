@@ -1,3 +1,6 @@
-ID,Raggruppamento,Descrizione,Modalità,Formato,Percentuale
-1,ACDat,Verifica e gestione dei file caricati in ACDat,MANU,nativo + ifc,0%
-2,ACDat,Verifica che i nomi dei file rispettano le indicazioni del pGI,MANU,nativo + ifc,0%
+In/Out,ID,Raggruppamento,Descrizione,Formato,Percentuale
+X,5,ACDat,I file caricati in ACDat sono apribili e non presentano warning relativi al caricamento,Nativo + ifc,0%
+X,6,ACDat,I nomi dei file di modello nativo e IFC rispettano le indicazioni presenti nel pGI,Nativo + ifc,0%
+X,7,ACDat,I nomi di eventuali documenti/elaborati caricati e collegati rispettano le indicazioni presenti nel pGI,-,0%
+,8,ACDat,Archiviazione dei file nella posizione concordata all'interno dell'ACDat,Nativo + ifc,0%
+X,9,ACDat,Alla consegna del modello è contestualmente consegnato un Report della modellazione informativa,-,0%

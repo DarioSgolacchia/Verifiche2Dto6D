@@ -1,7 +1,8 @@
-ID,Raggruppamento,Descrizione,Modalità,Formato,Percentuale
-1,Naming Convention,Controllo della corretta applicazione delle convenzioni di naming nel modello,ESTR,ifc,0%
-2,Naming Convention,Il nome della famiglia e del tipo dei componenti modellati rispetta la struttura e i valori previsti nella naming convention allegata al pGI,ESTR,nativo + ifc,0%
-3,Naming Convention,Il nome dei parametri rispetta la struttura e i valori previsti nella naming convention allegata al pGI,ESTR,ifc,0%
-4,Naming Convention,Il nome dei materiali rispetta la struttura e i valori previsti nella naming convention allegata al pGI,ESTR,ifc,0%
-5,Naming Convention,Il nome dei locali/spazi/zone rispetta la struttura e i valori previsti nella naming convention allegata al pGI,ESTR,ifc,0%
-6,Naming Convention,Il nome delle fasi di progetto rispetta la struttura e i valori previsti nella naming convention allegata al pGI,ESTR,ifc,0%
+In/Out,ID,Raggruppamento,Descrizione,Formato,Percentuale
+,47,Naming Convention,La struttura della codifica degli abachi e/o tabelle materiali nel modello nativo rispetta i valori ammissibili previsti ,Nativo,0%
+,48,Naming Convention,Il nome delle viste nel modello nativo rispetta la struttura e i valori previsti nella naming convention allegata al pGI,Nativo,0%
+X,49,Naming Convention,Il nome della famiglia e del tipo dei componenti modellati (e relativi parametri del modello IFC) rispetta la struttura e i valori previsti nella naming convention allegata al pGI,Nativo + ifc,0%
+X,50,Naming Convention,Il nome dei parametri rispetta la struttura e i valori previsti nella naming convention allegata al pGI,ifc,0%
+X,51,Naming Convention,Il nome dei materiali rispetta la struttura e i valori previsti nella naming convention allegata al pGI,ifc,0%
+X,52,Naming Convention,Il nome dei locali/spazi/zone rispetta la struttura e i valori previsti nella naming convention allegata al pGI,ifc,0%
+X,53,Naming Convention,Il nome delle fasi di progetto rispetta la struttura e i valori previsti nella naming convention allegata al pGI,ifc,0%

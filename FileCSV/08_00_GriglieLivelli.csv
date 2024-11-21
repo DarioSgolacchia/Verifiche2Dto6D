@@ -1,2 +1,6 @@
-ID,Raggruppamento,Descrizione,Modalità,Formato,Percentuale
-1,Griglie e livelli,Verifica dei livelli e delle griglie rispetto alle specifiche,MANU,nativo,0%
+In/Out,ID,Raggruppamento,Descrizione,Formato,Percentuale
+X,15,Griglie e livelli,Le griglie e i livelli di riferimento sono stati impostati come da indicazioni progettuali e come indicato nel pGI,Nativo,0%
+X,16,Griglie e livelli,Griglie e livelli sono bloccati in posizione al fine di prevenire eventuali spostamenti accidentali,Nativo,0%
+X,17,Griglie e livelli,Il nome di griglie e livelli rispetta la struttura e i valori previsti nella naming convention allegata al pGI,ifc,0%
+X,18,Griglie e livelli,Assenza di livelli dedicati alla disciplina impiantistica se non precedentemente concordati con AdB,ifc,0%
+,19,Griglie e livelli,Compilazione dei parametri “Piano edificio” e “Piano superiore” negli oggetti “Livello”,ifc,0%

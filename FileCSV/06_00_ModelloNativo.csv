@@ -1,2 +1,2 @@
-ID,Raggruppamento,Descrizione,Modalità,Formato,Percentuale
-1,Collegamenti modello nativo,Verifica dei collegamenti e compatibilità tra i file nativi,MANU,nativo,0%
+In/Out,ID,Raggruppamento,Descrizione,Formato,Percentuale
+X,10,Collegamenti modello nativo,Eventuali dettagli costruttivi inseriti come file collegati (es. dwg pdf ecc.) sono coerentemente posizionati rispetto alle geometrie del modello,Nativo,0%
