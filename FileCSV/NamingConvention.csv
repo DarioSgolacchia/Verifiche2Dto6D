@@ -1,7 +1,0 @@
-ID,Raggruppamento,Descrizione,Modalità,Formato,Percentuale
-1,Naming Convention,Controllo della corretta applicazione delle convenzioni di naming nel modello,ESTR,ifc,0%
-2,Naming Convention,Il nome della famiglia e del tipo dei componenti modellati rispetta la struttura e i valori previsti nella naming convention allegata al pGI,ESTR,nativo + ifc,0%
-3,Naming Convention,Il nome dei parametri rispetta la struttura e i valori previsti nella naming convention allegata al pGI,ESTR,ifc,0%
-4,Naming Convention,Il nome dei materiali rispetta la struttura e i valori previsti nella naming convention allegata al pGI,ESTR,ifc,0%
-5,Naming Convention,Il nome dei locali/spazi/zone rispetta la struttura e i valori previsti nella naming convention allegata al pGI,ESTR,ifc,0%
-6,Naming Convention,Il nome delle fasi di progetto rispetta la struttura e i valori previsti nella naming convention allegata al pGI,ESTR,ifc,0%
