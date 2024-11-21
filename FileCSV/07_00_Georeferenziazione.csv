@@ -1,7 +1,3 @@
-ID,Raggruppamento,Descrizione,Modalità,Formato,Percentuale
-1,Georeferenziazione e Orientamento,Verifica del sistema di coordinate e orientamento del modello,MANU,nativo + ifc,0%
-
-
 In/Out,ID,Raggruppamento,Descrizione,Formato,Percentuale
 X,11,Georeferenziazione e Orientamento,Il sistema di coordinate è georeferenziato in longitudine e latitudine coerentemente con il sistema condivido,Nativo + ifc,0%
 X,12,Georeferenziazione e Orientamento,I modelli disciplinari sono posizionati alla corretta quota altimetrica,Nativo + ifc,0%
