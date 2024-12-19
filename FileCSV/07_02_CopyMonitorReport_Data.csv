@@ -1,0 +1,9 @@
+Id Elemento,Nome Elemento,Pin Attivo,Copy-Monitor,Stato
+137119,1,1,0,0
+137165,2,1,0,0
+137201,A,0,1,0
+137203,4,0,1,0
+933,0 - Piano Terra,Non Pinnato,Monitorato,0
+1704,1 - Piano Primo,Pinnato,Monitorato,1
+137264,3 - Piano Terzo,Non Pinnato,Monitorato,0
+137266,2 - Piano Secondo,Non Pinnato,Monitorato,0
