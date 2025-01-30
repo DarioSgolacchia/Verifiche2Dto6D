@@ -1,10 +1,5 @@
 Nome Locale,ID Elemento,Verifica,Stato
-28.1602,2218454,Locale non racchiuso,0
-28.0343,2219715,Locale non racchiuso,0
-28.0342,2219718,Locale non racchiuso,0
-28.0344,2219721,Locale non racchiuso,0
-28.0448,2219724,Locale non racchiuso,0
-28.0346,2219727,Locale non racchiuso,0
-28.0449,2219730,Locale non racchiuso,0
-28.0345,2219733,Locale non racchiuso,0
-28.0334,2233096,Locale non racchiuso,0
+Locale,137535,Locale non racchiuso,0
+Locale,137562,Locale non racchiuso,0
+Locale,137584,Locale ridondante,0
+Locale,137532,Locale non posizionato,0
